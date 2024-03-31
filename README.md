@@ -8,6 +8,7 @@ This repository contains the backend implementation for the Vendease platform. T
 - In the project folder, Change ```.env.example ``` file in the project root directory to ```.env```
 - Replace the DATABASE_URL with your preferred postgres url.
 - Run command ```npm install``` to download project dependencies
+- Run command ```npm run db:migrate``` to run database migrations
 - Run command ```npm run start:dev``` to run application
 - Run command ```npm run test``` to run unit test
 
