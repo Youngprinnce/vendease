@@ -1,72 +1,43 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Vendease Backend Implementation
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+This repository contains the backend implementation for the Vendease platform. The implementation follows the technical requirements provided in the task description.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
-
-## Description
-
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
 ## Installation
+- On your desktop terminal run the command ```git clone https://github.com/Youngprinnce/vendease.git```
+- In the project folder, Change ```.env.example ``` file in the project root directory to ```.env```
+- Replace the DATABASE_URL with your preferred postgres url.
+- Run command ```npm install``` to download project dependencies
+- Run command ```npm run start:dev``` to run application
+- Run command ```npm run test``` to run unit test
 
-```bash
-$ npm install
-```
+## Swagger Documentation
 
-## Running the app
+The documentation for the API endpoints is available on Swagger. You can access it using the following link:
 
-```bash
-# development
-$ npm run start
+[Swagger Documentation](https://vendease-8c336a838f33.herokuapp.com/api-docs#/)
 
-# watch mode
-$ npm run start:dev
+### Implemented Endpoints
 
-# production mode
-$ npm run start:prod
-```
+- **Episode Resource**
+  - `GET /episodes`: Episode list endpoint sorted by “releaseDate” from oldest to newest with each episode listed along with the count of comments
+  - `POST /episodes`: Create new episodes.
+  - `POST /episodes/:id/comments`: Add a comment to an Episode Object.
+  - `GET /episodes/get-character-episodes/:characterId`: Retrieve a List of Episodes a Character is featured in.
+  - `POST /episodes/:id/assign-characters`: Link multiple characters to an episode
 
-## Test
+- **Comment Resource**
+  - `GET /comments`: Retrieve all comments in reverse chronological order with the public IP address of the commenter and DateTime they were stored.
 
-```bash
-# unit tests
-$ npm run test
+- **Characters**
+  - `GET /characters`: Retrieve all characters
+  - `POST /characters`: Create a character
+  - `POST /characters/:id/assign-episodes`: Link multiple episodes to a character
 
-# e2e tests
-$ npm run test:e2e
+- **Lcation**
+  - `GET /locations`: Endpoint to retrieve all locations
+  - `POST /locations`: Endpoint to create a location
 
-# test coverage
-$ npm run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
 
 ## License
 
