@@ -1,0 +1,71 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "debian-openssl-1.1.x", "debian-openssl-3.0.x", "linux-musl", "linux-musl-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum CharacterStatus {
+  ACTIVE
+  DEAD
+  UNKNOWN
+}
+
+enum Gender {
+  MALE
+  FEMALE
+}
+
+model Character {
+  id              String          @id @default(uuid())
+  first_name      String
+  last_name       String
+  status          CharacterStatus
+  state_of_origin String
+  gender          Gender
+  locationId      String          @unique
+  location        Location        @relation(fields: [locationId], references: [id])
+  episodes        Episode[]       @relation("CharacterEpisodes")
+  created_at      DateTime        @default(now())
+
+  @@unique([first_name, last_name, state_of_origin], name: "unique_character_constraint")
+}
+
+model Episode {
+  id               String      @id @default(uuid())
+  name             String
+  release_date     DateTime
+  episode_code     String
+  characters       Character[] @relation("CharacterEpisodes")
+  episode_comments Comment[]   @relation("EpisodeComments")
+  created_at       DateTime    @default(now())
+
+  @@unique([episode_code], name: "unique_episode_code_constraint")
+}
+
+model Location {
+  id         String     @id @default(uuid())
+  name       String
+  latitude   Float
+  longitude  Float
+  created_at DateTime   @default(now())
+  character  Character?
+}
+
+model Comment {
+  id                  String   @id @default(uuid())
+  comment             String   @db.VarChar(250)
+  ip_address_location String
+  episodeId           String
+  episode             Episode  @relation(fields: [episodeId], references: [id], name: "EpisodeComments")
+  created_at          DateTime @default(now())
+}
