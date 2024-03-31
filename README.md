@@ -24,7 +24,6 @@ The documentation for the API endpoints is available on Swagger. You can access 
   - `POST /episodes`: Create new episodes.
   - `POST /episodes/:id/comments`: Add a comment to an Episode Object.
   - `GET /episodes/get-character-episodes/:characterId`: Retrieve a List of Episodes a Character is featured in.
-  - `POST /episodes/:id/assign-characters`: Link multiple characters to an episode
 
 - **Comment Resource**
   - `GET /comments`: Retrieve all comments in reverse chronological order with the public IP address of the commenter and DateTime they were stored.

@@ -1,11 +1,10 @@
+import { Request } from 'express';
+import { Comment } from '../models/comment.models';
+import { EpisodesService } from './episodes.service';
 import { Test, TestingModule } from '@nestjs/testing';
 import { EpisodesController } from './episodes.controller';
-import { EpisodesService } from './episodes.service';
 import { CreateEpisodeDto } from './dto/create-episode.dto';
-import { AssignCharactersDto } from './dto/assign-characters.dto';
-import { Comment } from '../models/comment.models';
 import { AddCommentDto, CreateCommentDto } from './dto/add-comment.dto';
-import { Request } from 'express';
 
 describe('EpisodesController', () => {
   let controller: EpisodesController;
@@ -114,17 +113,6 @@ describe('findAll', () => {
 
       const result = await controller.createEpisode(createEpisodeDto);
       expect(result).toEqual(episodes[0]);
-    });
-  });
-
-  describe('linkCharacters', () => {
-    it('should link characters to an episode', async () => {
-      const episodeId = '1';
-      const assignCharactersDto: AssignCharactersDto = { characterIds: ['1'] };
-      jest.spyOn(episodesService, 'assignCharacters').mockResolvedValue();
-
-      const result = await controller.linkCharacters(episodeId, assignCharactersDto);
-      expect(result).toBeUndefined();
     });
   });
 });

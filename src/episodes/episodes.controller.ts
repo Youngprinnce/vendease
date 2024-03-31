@@ -1,15 +1,13 @@
+import { Request } from 'express';
 import { Comment } from '../models/comment.models';
-import { EpisodesService } from './episodes.service';
 import { Episode } from '../models/episodes.models';
-import { AddCommentDto, CreateCommentDto } from './dto/add-comment.dto';
+import { EpisodesService } from './episodes.service';
+import { CreateEpisodeDto } from './dto/create-episode.dto';
+import { GetEpisodesDto } from './dto/get-episodes-response';
 import { InvalidUUIDPipe } from '../common/pipes/uuid.pipes';
 import { ApiOkResponse, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { AddCommentDto, CreateCommentDto } from './dto/add-comment.dto';
 import { Body, Controller, Get, HttpCode, HttpStatus, Param, Post, Req } from '@nestjs/common';
-import { Request } from 'express';
-import { CreateEpisodeDto } from './dto/create-episode.dto';
-import { AssignCharactersDto } from './dto/assign-characters.dto';
-import { GetEpisodesDto } from './dto/get-episodes-response';
-
 @ApiTags('Episodes')
 @Controller('episodes')
 export class EpisodesController {
@@ -65,18 +63,5 @@ export class EpisodesController {
     @Body() createEpisodeDto: CreateEpisodeDto,
   ) {
     return this.episodesService.createEpisode(createEpisodeDto);
-  }
-
-  @Post(':id/assign-characters')
-  @HttpCode(HttpStatus.NO_CONTENT)
-  @ApiResponse({
-    status: HttpStatus.NO_CONTENT,
-    description: 'Link characters to an episode',
-  })
-  linkCharacters(
-    @Param('id', InvalidUUIDPipe) id: string,
-    @Body() assignCharactersDto: AssignCharactersDto,
-  ) {
-    return this.episodesService.assignCharacters(id, assignCharactersDto);
   }
 }
